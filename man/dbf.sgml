@@ -1,0 +1,293 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+
+<!-- Process this file with docbook-to-man to generate an nroff manual
+     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
+     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
+     less'.  A typical entry in a Makefile or Makefile.am is:
+
+manpage.1: manpage.sgml
+	docbook-to-man $< > $@
+
+    
+	The docbook-to-man binary is found in the docbook-to-man package.
+	Please remember that if you create the nroff version in one of the
+	debian/rules file targets (such as build), you will need to include
+	docbook-to-man in your Build-Depends control field.
+
+  -->
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>UWE</firstname>">
+  <!ENTITY dhsurname   "<surname>STEINMANN</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>August 27, 2004</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>SECTION</manvolnum>">
+  <!ENTITY dhemail     "<email>uwe@steinmann.cx</email>">
+  <!ENTITY dhusername  "Uwe Steinmann">
+  <!ENTITY dhucpackage "<refentrytitle>DBF</refentrytitle>">
+  <!ENTITY dhpackage   "dbf">
+
+  <!ENTITY debian      "<productname>Debian</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+  <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2004</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>Read dBASE files and write csv, sql, or dbase output</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+
+      <arg><option>-h <replaceable></replaceable></option></arg>
+
+      <arg><option>--view-info </option></arg>
+      <arg><option>--sql <replaceable>FILE</replaceable></option></arg>
+      <arg><option>--csv <replaceable>FILE</replaceable></option></arg>
+      <arg><option>--dbf <replaceable>FILE</replaceable></option></arg>
+      <arg><option>--trim <replaceable>l|r|b</replaceable></option></arg>
+      <arg><option>--debug <replaceable>0-9</replaceable></option></arg>
+      <arg><option>--keepdel </option></arg>
+      <arg><option>--nodrop </option></arg>
+      <arg><option>--nocreate </option></arg>
+      <arg><option>--empty-str-is-null </option></arg>
+      <arg><option>--separator CHAR</option></arg>
+      <arg><option>--tablename NAME</option></arg>
+      <arg><option>--start-record NUM</option></arg>
+      <arg><option>--num-records NUM</option></arg>
+      <arg><option><replaceable>FILE</replaceable></option></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page documents briefly the
+      <command>&dhpackage;</command> command.</para>
+
+    <para><command>&dhpackage;</command> is a program that reads dBASE files
+		  and converts them to csv, sql or simply dumps its content in dbf's own
+			format.</para>
+
+  </refsect1>
+  <refsect1>
+    <title>OPTIONS</title>
+
+    <para>This program follows a &gnu;-like command line syntax,
+      with long options starting with two dashes (`-'), but without the
+			equal sign (`=') before the option value.  A summary of
+      options is included below.  For a complete description, see the
+      <application>Info</application> files.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><option>-h</option>
+          <option>--help</option>
+        </term>
+        <listitem>
+          <para>Show summary of options.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-v</option>
+          <option>--version</option>
+        </term>
+        <listitem>
+          <para>Show version of program.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--view-info</option>
+        </term>
+        <listitem>
+          <para>List various information including the table structure of
+					  the dBASE file. This option will supress the output of the
+						record data.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--debug {0-9}</option>
+        </term>
+        <listitem>
+          <para>Set debug level to a value between 0 and 9. The default is
+					  0 which supressed all debug messages.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--sql FILENAME</option>
+        </term>
+        <listitem>
+          <para>Converts the dBASE file into sql statements suitable for
+					  most databases. The output will by default include statements
+						to drop an exiting table with the same name, recreate the table
+						structure and insert the records. Use the option
+						<option>--nodrop</option> if the output may not contain the
+						sql statement to drop an exiting table. Use
+						<option>--nocreate</option> to prevent recreation of the table.
+						If FILENAME is `-' the ouput will be written to stdout.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--trim {r|l|b}</option></term>
+        <listitem>
+          <para>Trim the values of character fields. Triming a value means
+					  to remove leading and trailing spaces. Field values can be
+					  trimmed on the left (l), right (b), or on both sides (b).
+						This option has only affect in sql output mode. Passing
+						<option>--trim b</option> is usually a good idea to reduce the
+						output file size.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--csv FILENAME</option>
+        </term>
+        <listitem>
+          <para>Converts the dBASE file into lines of comma separated values
+					  suitable for most spread sheets. The first line of the output file
+						contains the field names, its type and size. If FILENAME is `-'
+						the ouput will be written to stdout. Use the option
+						<option>--separator</option> to set a different field separator
+						than a comma.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--dbf FILENAME</option>
+        </term>
+        <listitem>
+          <para>Converts the dBASE file into another dBASE file.
+						This option is most useful for extracting certain records from
+						the input file.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--separator CHAR</option>
+        </term>
+        <listitem>
+          <para>Set the char which is used to separate field values in
+					  csv output.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--tablename NAME</option>
+        </term>
+        <listitem>
+          <para>Explixitly set the name of the table in the sql output. If
+					  tablename is not set the name of the export file will be
+						used. If the export file is stdout the table name must be set,
+						otherwise the program will quit with an error.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--start-record NUM</option>
+        </term>
+        <listitem>
+          <para>The first record to ouput is record <option>NUM</option>.
+					  The first record in a database has number 1. If
+						<option>NUM</option> is negative it will indicate the number
+						of the record counting from from end of the database. -1 is the
+						last record.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--num-records NUM</option>
+        </term>
+        <listitem>
+          <para>Output only <option>NUM</option> records. <option>NUM</option>
+					  must be greater than zero.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--keepdel</option>
+        </term>
+        <listitem>
+          <para>Also output records which are marked as `deleted'.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--nodrop</option>
+        </term>
+        <listitem>
+          <para>Prevent the output of the sql statement to drop a table.
+					  This option is useful if there is no table to drop and to prevent
+						an error message. The option has only affect in sql output
+						mode.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--nocreate</option>
+        </term>
+        <listitem>
+          <para>Prevent the output of the sql statement to create a table
+					  with the structure of the dBASE file. This is most usefull if
+						the table already exists and should only be populated with
+						more records. This option should be used together with
+						<option>--nodrop</option> to make sense. The option has only
+						affect in sql output mode.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>--empty-str-is-null</option>
+        </term>
+        <listitem>
+          <para>Output empty strings as NULL values in sql output.
+						</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>bar (1), baz (1).</para>
+
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>This manual page was written by &dhusername; &dhemail;
+      </para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
+
+
