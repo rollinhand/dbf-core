@@ -1,0 +1,181 @@
+Official FAQ for dbf
+====================
+
+Author: Bjoern Berg, clergyman@gmx.de
+Date: 17/01/2003
+
+More information and an up-to-date FAQ you find on 
+http://anubisnet.sf.net/support.php
+
+
+Topics:
+-------
+
+I. 	User-contributed questions
+II.	Information for developers
+
+
+I. User-contributed questions
+-----------------------------
+
+1) How to install dbf
+
+This document contains general installation instructions for dbf. 
+Most of the information published here you also find in the added 
+README of any software package you can download from an anubisnet 
+server.
+
+Installation instruction for dbf 0.2 - 0.3.1
+
+These versions do not contain Makefiles or any other sort of 
+installation script. Therefore you have to compile dbf yourself, using 
+gcc or any other compiler, you have installed. We will describe, how 
+to handle gcc.
+
+Use gcc as follows:
+
+Linux:
+gcc -o dbf dbf.c
+
+Windows:
+gcc -o dbf.exe dbf.c
+
+Copy the created binary to a place which is in your $PATH and execute 
+dbf by invoking "dbf" at the command line.
+
+For newer versions have a look at the documents README and INSTALL 
+delivered with the downloaded package.
+
+####
+
+2) Compiling on Windows
+
+This page describes how to compile dbf from the source with other 
+compilers than gcc on Windows
+
+Compiling with Microsoft C/C++ Compiler
+
+The Microsoft C/C++ Compiler is delivered with Microsoft Visual Studio. If you 
+have selected the Default installation, it should be found in 
+C:\Program Files\Microsoft Visual Studio\VC98\Bin and is called "cl.exe". 
+Run "cl \dbf.c" and dbf should compile fine.
+
+####
+
+3) Compiling on Linux
+
+Since version 0.3.2, dbf comes with a Makefile which helps you to easily
+compile and install dbf on any UN*X based system. In the following we will describe 
+how to get a clean installation with dbf-packages less or more recent version 0.3.2.
+
+Versions before 0.3.2
+
+Unpack any source package to a directory called dbf, because otherwise the complete 
+package would be extract to the current directory without a sub-directory for dbf.
+
+Now switch into the directory and type:
+gcc -o dbf dbf.c
+to compile dbf. If everything went fine, copy the binary to a directory in your PATH, 
+e.g. /usr/local/bin, /usr/bin.
+
+Version 0.3.2 and higher
+
+Version 0.3.2 comes with a Makefile which makes compiling and installing much more easier. 
+You can extract the archive to your current directory, because it will create its own 
+sub-directory, called dbf-$VERSION.
+
+Switch into this directory and type
+make
+to build the binary. With "make clean" you can remove this built binary. To install the 
+binary to the generic (prefix) path (/usr/local/bin) type
+make install
+With "make install" you can remove your complete installation.
+
+####
+
+4)  I get silly output from dbf!
+
+You are trying to display or convert the content of a dBASE-file, but all you get is a mess. 
+This can have several reasons:
+
+a) The codepage used in your dBASE-file is not yet supported with dbf. This concerns files 
+using eastern european and asian encodings
+
+b) The file you want to convert is not dBASE-compliant. This could happen when the file 
+was exported from StarOffice, Excel or MS Access into any kind of format of dBASE.
+
+c) Uwe Steinmann reported us, affecting version 0.3.2 and less, that on not intel-based 
+architectures dbf produces mess. dbf is in its current version not yet endianness-save, 
+which means that dbf expects the major byte at the beginning of a long or a short. We will 
+try to fix this with the next release.
+
+#### 
+
+5) SQL statements are not created properly.
+
+You are using a version of dbf equal or higher than 0.6 and SQL export does not do what you have
+expected?! Please note that SQL export is in an experimental stadium, so that we cannot guarantee
+for a working implementation.
+Please send a detailed report to clergyman@gmx.de and we will try to help you.
+
+########################################################################
+
+II. Information for Developers
+------------------------------
+
+1) G E N E R A L 
+
+If you want to contribute to the dbf-project at anubisnet you can contact me, writing an 
+email to clergyman@gmx.de.
+
+There is a lot to do and a structured release plan is available. What I need for the moment
+is someone who can build binary packages for platforms like AXP, SPARC, etc. For this 
+platforms we need also developers and testers whose job will be to check if the current 
+version is interoperabel and endianess-save (see point 4 of the user contributed FAQs).
+
+I also need someone who uses dbf daily and keep the documentation up to date if 
+something changes. 
+
+A good start to get familar with dbf and its current development status is to read the 
+CHANGELOG and the README.
+
+I am very glad, when I get a feedback from developers or end-users. So don't hesitate 
+and write me an email. Criticism is heavily desired.
+
+More information on how to contribute to dbf an anubisnet you find on the 
+anubisnet website: http://anubisnet.sf.net/volunteer/index.php
+
+###
+
+2) P A C K A G E  B U I L D I N G
+
+2.1) LINUX
+
+Building a binary package of dbf on Linux is very easy. The Makefile I have added to dbf
+has mechanisms to build automatically source or binary packages including the complete 
+documentation coming with dbf. At the moment you are able to build packages for i386 (ELF),
+Alpha / RISC (AXP) and PPC:
+	
+	a) Download the current stable source of dbf.
+	b) I assume that you want to use gcc to compile dbf, otherwise edit the Makefile
+	c) Now use one of the following commands to build a binary package:
+		- make elf-dist (i386, ELF)
+		- make axp-dist (AXP, Alpha, RISC)
+		- make ppc-dist (PPC, MAC)
+	  NOTE: You have to rename the current source directory of dbf from "dbf-<version>" to
+	  dbf. Otherwise the Makefile will cancel the action.
+	d) Send the ready binary package to clergyman@gmx.de  
+
+
+2.2) WINDOWS
+
+A detailed and easy instruction how to build binary packages for Windows will follow soon.
+
+
+2.3) MacOS X
+
+A detailed and easy instruction how to build binary packages for MacOS X will follow soon.
+		
+
+
+ 
