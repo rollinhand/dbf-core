@@ -1,0 +1,76 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_INIT(dbf, 0.9.0, [http://dbf.berlios.de])
+AC_CONFIG_SRCDIR(src/dbf.c)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+AM_MAINTAINER_MODE
+AC_CONFIG_HEADER(config.h)
+AC_PROG_INTLTOOL
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+
+dnl Add the languages which your application supports here.
+ALL_LINGUAS="de"
+AM_GLIB_GNU_GETTEXT
+GETTEXT_PACKAGE=dbf
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", GETTEXT_PACKAGE)
+
+AM_PROG_LIBTOOL
+
+# Checks for libraries.
+AC_ARG_WITH(dbflib, [  --with-dbflib=DIR        Path to dbf library (/usr)])
+if test -r ${withval}/include/dbf.h ; then
+  DBFLIB_LIBDIR=-L${withval}/lib
+  DBFLIB_INCLUDEDIR=-I${withval}/include
+else
+  DBFLIB_LIBDIR=-L/usr
+  DBFLIB_INCLUDEDIR=-I/usr/include
+fi
+
+AC_CHECK_LIB(dbf, dbf_Open,
+  DBFLIB_LIBDIR="$DBFLIB_LIBDIR",
+  AC_MSG_ERROR([libdbf not found. You will need at least libdbf 0.3.0]),
+  "$DBFLIB_LIBDIR")
+
+DBFLIB_LIBS=-ldbf
+
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([fcntl.h limits.h stdlib.h string.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+
+AC_CHECK_PROG(DOC_TO_MAN, docbook-to-man, docbook-to-man)
+if test ! "$DOC_TO_MAN" ; then
+  DOCDIR=
+  AC_MSG_RESULT([docbook-to-man could not be found. I will not build man pages!])
+else
+  DOCDIR=man
+fi
+
+AC_SUBST(DBFLIB_LIBDIR)
+AC_SUBST(DBFLIB_LIBS)
+AC_SUBST(DBFLIB_INCLUDEDIR)
+
+AC_SUBST(DOCDIR)
+AC_SUBST(DOC_TO_MAN)
+
+AC_OUTPUT([dbf.spec
+           Makefile
+           man/Makefile
+           src/Makefile
+					 po/Makefile.in
+					])
