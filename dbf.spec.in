@@ -1,0 +1,38 @@
+Summary: Program to read and convert dBASE files
+Name: dbf
+Version: @PACKAGE_VERSION@
+Release: 1
+Copyright: see doc/COPYING
+Group: Applications/Utils
+Url: http://dbf.berlios.de/
+Packager: Uwe Steinmann <uwe@steinmann.cx>
+Source: http://downloads.berlios.de/dbf/dbf-%{PACKAGE_VERSION}.tar.gz
+BuildRoot: /var/tmp/rpm/dbf-root
+Prefix: /usr
+
+%description
+dbf is an easy-to-use command line tool to show and convert the content 
+of dBASE III, IV, and 5.0 files. It reads dBASE databases and prints the
+content to the screen or converts it to comma-separated (*.csv) files 
+which can be opened in Excel, StarOffice, and most other spread sheets. 
+It can also be used to show some statistics about the content.
+
+%prep
+%setup
+
+%build
+./configure --prefix=%prefix --mandir=%prefix/share/man --infodir=%prefix/share/info
+make
+
+%install
+rm -rf ${RPM_BUILD_ROOT}
+install -d -m 755 ${RPM_BUILD_ROOT}
+make DESTDIR=${RPM_BUILD_ROOT} install
+
+%clean
+rm -rf ${RPM_BUILD_ROOT}
+
+%files
+%attr(-,root,root) %doc README AUTHORS ChangeLog COPYING INSTALL
+%attr(-,root,root) %{prefix}/bin/*
+%attr(-,root,root) %{prefix}/share/man/man1/*
