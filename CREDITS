@@ -1,0 +1,53 @@
+The people who made this tool happen:
+
+Main Authors:
+===============
+
+Björn Berg, clergyman@gmx.de: 
+dbf-core and GUI
+
+Ross Jones, ross@companyofarchers.org:
+A lot of fixes and a helpful hand while porting dbf to PPC, especially MacOS X.
+
+Mikhail Teterin
+He has mainly written the code for dbf 0.7 and has improved a lot of features
+dbf offers. The entire code was rewritten by him.
+
+
+Contributors:
+=============
+
+My thanks go to the following persons who assist me developing this tool:
+
+* Joachim Astel:
+1998 Joachim Astel produced the first prototype of dbf in a nightly hack. 2002 I
+have taken this code and wrapped more than 2500 lines of code around it.
+Without Joachim dbf would not exist in the form as it does today. Parts of the
+core (dbf.c) are still credited to him, although there were a lot of changes in
+the last months.
+
+* Ed Guy:
+hints how to convert symbols and characters in dBASE 3 files
+
+* Andy Jeffries, opensource@andyjeffries.co.uk:
+memory leak fix, dbf now uses a constant memory of 424 KB during conversion of a
+dBASE file. See CHANGELOG for more information.
+
+* Christian Vogel, chris@obelix.hedonism.cx:
+Patch which changes all occurences of "char" to "unsigned char" in codepages.h of 
+dbf-0.4. This avoids many warnings about "case statement out of range"
+
+* Dr. Georg Roesler:
+SQL Export, bugfixes and code optimization
+
+
+Testers:
+========
+
+I also want to thank the people who have taken the time to test dbf under several
+circumstances and who stand my never-ending questions and requests for testing 
+newer versions:
+
+* Uwe Steinmann, uwe@steinmann.cx: PPC
+* Kai Witte, kai@witte-offline.de: PPC
+* John McVeagh: AIX

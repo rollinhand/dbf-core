@@ -1,0 +1,175 @@
+dbf version 0.7
+dBASE reader and converter for dBASE databases
+Author: Bjoern Berg
+Email: clergyman@gmx.de
+
+dbf is an easy-to-use command line tool to show and convert the content 
+of dBASE III, IV, and 5.0 files. It reads dBASE databases and prints the
+content to the screen or converts it to comma-separated (*.csv) files 
+which can be opened in Excel, StarOffice, and most other spread sheets. 
+It can also be used to show some statistics about the content.
+
+This programme bases on the source of Joachim Astel published
+16/01/1995 in de.comp.databases and was improved and extended at some
+points. At the moment binaries could be received during
+http://www.anubisnet.de for Windows and Linux.
+
+
+Features:
+=========
+
+- CSV Converter
+dBASE III could be easily converted to CSV-files which could be opened with the
+most popular spread sheets.
+
+- SQL Exporteur
+dbf supports since version 0.6 an experimental export to SQL instruction setting files,
+so called SQL statements. 
+
+- Code Pages
+dBASE III files were now automatically encoded with the optimal chars and umlauts
+for american, english and western european data sets.
+
+- Endianess-save
+Since version 0.5, dbf is usable on nearly every architecture, if it is Big Endian 
+or Little Endian. 
+
+
+Support:
+========
+
+For these platforms and database formats we can guarantee that dbf works
+
+Platform:
+---------
+Linux 		i386	AXP		PPC
+Windows		i386
+MacOS X		PPC
+Darwin
+*BSD		i386
+AIX 4.3.3
+
+
+Database:
+---------
+dBASE III
+dBASE IV
+dBASE 5.0
+
+ATTENTION: Since version 0.7 we cannot guarantee, that dbf supports the above 
+mentioned platforms and operating systems any longer because of some major and
+important changes in the code.
+
+
+Compiling and Installation:
+===========================
+
+See INSTALL and http://anubisnet.sf.net/support.php for more details.
+
+
+Usage:
+======
+
+These commands are for all versions:
+------------------------------------
+
+- in general
+
+dbf --csv <csv-filename> <dbf-file> 
+dbf --sql <sql-filename> <dbf-file>
+dbf --view-info <dbf-file>
+dbf --help or -h for help
+
+You could start the programme as follows:
+
+dbf C:\My Files\mydbf.dbf
+dbf /home/<user>/mydbf.dbf
+
+and displays the whole data on console.
+
+- converting into comma separated files (CSV) Datei
+
+dbf --csv mycsv.csv C:\Eigene Dateien\mydb.dbf
+dbf --csv mycsv.csv /home/<user>/mydb.dbf
+
+- converting into SQL statements
+
+Please note that the sql-filename also reflects the name for the table that is 
+created.
+
+dbf --sql mysql.sql C:\Eigene Dateien\mydb.dbf
+dbf --sql mysql.sql /home/<user>/mydb.dbf
+
+Since dbf 0.7 dbf supports also the following handlers:
+-------------------------------------------------------
+
+--trim {r|l|b} 
+Trims whitespaces in dBASE-files if necessary (r)ight, (l)eft or on (b)oth sides
+of a data set.
+
+--separator {c}
+With the flag separator you are now able to define your own separator between your 
+CSV data sets. The default is ",".
+
+--noconv
+Disables the experimental code page conversion.
+
+--debug {0-9}
+Defines the different debug levels.
+
+
+Comments on some functions:
+---------------------------
+
+- show file statistic
+Since version 0.3.0 the statitical output and information about the fields are no 
+longer displayed automatically, but can be shown with the flag "--view-info".
+
+- using Code Pages
+Since version 0.2.5 dbf has the ability to encode umlauts and chars of western 
+european languages. With version 0.3.0 dbf can do this automatically, so that the 
+flag -cs is outdated and no longer in use.
+
+- Override System Check
+With the flag --ppc you can disable the architecture check, so that you can give dbf
+a try on your Big Endian system. Maybe it works (only active in beta and development versions)
+
+
+Frequently Asked Questions / Help:
+==================================
+
+See the attached file FAQ or have a look at 
+http://anubisnet.sf.net/support.php for more help.
+
+Subscribe to our mailinglist for every question: 
+http://lists.sourceforge.net/lists/listinfo/dbf-general
+
+
+Contributors:
+=============
+
+see CREDITS for more details
+If you want to contribute to dbf or any other project of anubisnet, have a look at 
+our website: http://anubisnet.sourceforge.net/volunteer/index.php.
+See also FAQ for more information on dbf, and how to help on this project.
+
+
+Copyright:
+==========
+
+(c) 2002 - 2003, Bjoern Berg
+
+Permission to use, copy, modify, distribute and sell this software
+and its documentation for any purpose is hereby granted without fee,
+provided that the above copyright notice appear in all copies and
+that both that copyright notice and this permission notice appear
+in supporting documentation. The author makes no representations
+about the suitability of this software for any purpose.
+It is provided "as is" without express or implied warranty.	
+
+
+Comments, suggestions and bugs to: clergyman@gmx.de
+
+
+
+
