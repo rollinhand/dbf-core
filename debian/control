@@ -1,0 +1,16 @@
+Source: dbf
+Section: misc
+Priority: optional
+Maintainer: Uwe Steinmann <steinm@debian.org>
+Build-Depends: debhelper (>> 4.0.0)
+Standards-Version: 3.5.8
+
+Package: dbf
+Architecture: any
+Depends: ${shlibs:Depends} ${misc:Depends}
+Description: dBASE reader and converter for dBASE databases
+ dbf is an easy-to-use command line tool to show and convert the content
+ of dBASE III, IV, and 5.0 files. It reads dBASE databases and prints the
+ content to the screen or converts it to comma-separated (*.csv) files
+ which can be opened in Excel, StarOffice, and most other spread sheets.
+ It can also be used to show some statistics about the content.
