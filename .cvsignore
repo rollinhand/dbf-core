@@ -1,0 +1,16 @@
+Makefile
+Makefile.in
+config.*
+configure
+intltool*
+missing
+mkinstalldirs
+stamp-h1
+build-stamp
+aclocal.m4
+depcomp
+install-sh
+dbf.spec
+libtool
+stamp-h*
+.project
